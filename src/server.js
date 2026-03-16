@@ -10,7 +10,11 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
+<<<<<<< HEAD
 app.use(cors());
+=======
+app.use(cors());
+>>>>>>> 68da17544bf73109c0c6bd17590cb530c11155cc
 app.use(express.json());
 
 // Routes
