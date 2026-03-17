@@ -48,7 +48,7 @@ router.post('/my', protect, restrictTo('owner'), async (req, res) => {
 router.put('/my', protect, restrictTo('owner'), async (req, res) => {
   try {
     const nursery = await Nursery.findOneAndUpdate(
-      { owner: req.user._id }, req.body, { new: true, upsert: true }
+      { owner: req.user._id }, { ...req.body, status: 'approved' }, { new: true, upsert: true }
     );
     res.json({ nursery });
   } catch(err) {
