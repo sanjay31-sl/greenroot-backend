@@ -66,6 +66,7 @@ router.get('/nursery', protect, restrictTo('owner'), async (req, res) => {
     if (status && status !== 'all') filter.status = status;
     const orders = await Order.find(filter)
       .populate('customer', 'name phone')
+      .populate('items.plant', 'name emoji price')
       .sort({ createdAt: -1 });
     res.json({ orders });
   } catch(err) {
