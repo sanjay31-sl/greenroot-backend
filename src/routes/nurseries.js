@@ -12,6 +12,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET /api/nurseries/:id — public, get single nursery
+router.get('/:id', async (req, res) => {
+  try {
+    const nursery = await Nursery.findById(req.params.id);
+    if (!nursery) return res.status(404).json({ message: 'Nursery not found' });
+    res.json({ nursery });
+  } catch(err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 // GET /api/nurseries/my — owner get their nursery
 router.get('/my', protect, restrictTo('owner'), async (req, res) => {
   try {
