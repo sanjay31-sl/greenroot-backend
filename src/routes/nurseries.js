@@ -27,7 +27,7 @@ router.post('/my', protect, restrictTo('owner'), async (req, res) => {
   try {
     const exists = await Nursery.findOne({ owner: req.user._id });
     if (exists) return res.status(400).json({ message: 'Nursery already exists. Use PUT to update.' });
-    const nursery = await Nursery.create({ ...req.body, owner: req.user._id });
+   const nursery = await Nursery.create({ ...req.body, owner: req.user._id, status: 'approved' });
     res.status(201).json({ nursery });
   } catch(err) {
     res.status(500).json({ message: err.message });
